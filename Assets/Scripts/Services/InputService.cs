@@ -1,18 +1,76 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using UnityEngine;
 
-public class InputService : MonoBehaviour
-{
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+public class InputService
+	{
+		public Action<Vector2>	MoveAction		{ get; set;}
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-}
+		public Vector2			Movement 		{ get; set;} = new();
+
+		private readonly GameInputActions inputActions;
+
+		public InputService()
+		{
+			inputActions = new GameInputActions();
+
+			EnableInput();
+			LinkInput();
+			SetInputActive(true);
+			this.LogDebug("Started");
+		}
+
+		~InputService()
+		{
+			DisableInput();
+			UnlinkInputs();
+		}
+
+		public void SetInputActive(bool setActive)
+		{
+			SetPlayerInputActive(setActive);
+			SetUIInputActive(setActive);
+		}
+
+		public void SetPlayerInputActive(bool setActive)
+		{
+			if (setActive)
+				inputActions.Player.Enable();
+			else
+				inputActions.Player.Disable();
+		}
+
+		public void SetUIInputActive(bool setActive)
+		{
+			if (setActive)
+				inputActions.UI.Enable();
+			else
+				inputActions.UI.Disable();
+		}
+
+		private void UpdateMovementVector(Vector2 movement)
+		{
+			this.Movement = movement;
+		}
+
+		private void EnableInput()
+		{
+			inputActions.Player.Movement.Enable();
+		}
+
+		private void LinkInput()
+		{
+			MoveAction += UpdateMovementVector;
+			inputActions.Player.Movement.performed += context => MoveAction?.Invoke(inputActions.Player.Movement.ReadValue<Vector2>());
+		}
+
+		private void DisableInput()
+		{
+			inputActions.Player.Movement.Disable();
+		}
+
+		private void UnlinkInputs()
+		{
+			MoveAction -= UpdateMovementVector;
+			inputActions.Player.Movement.performed -= context => MoveAction?.Invoke(inputActions.Player.Movement.ReadValue<Vector2>());
+		}
+	}
