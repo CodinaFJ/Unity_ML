@@ -3,7 +3,9 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - reward
+  - punish
   layers:
   - Default
   - TransparentFX
@@ -40,4 +42,16 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Level
+    uniqueID: 4021307451
+    locked: 0
+  - name: Mask
+    uniqueID: 2521286003
+    locked: 0
+  - name: Environment
+    uniqueID: 335172295
+    locked: 0
+  - name: Entities
+    uniqueID: 2466344579
     locked: 0

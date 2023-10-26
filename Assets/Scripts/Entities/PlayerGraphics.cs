@@ -4,17 +4,13 @@ using UnityEngine;
 
 public class PlayerGraphics : EntityGraphics
     {
-        InputService    inputService;
         PlayerMovement  playerMovement;
 
         private void Start() {
-            inputService = ServiceLocator.Instance.GetService<InputService>();  
             playerMovement = GetComponent<PlayerMovement>();
-            inputService.MoveAction += SetMovingAnimation;
         }
 
-        private void OnEnable() {
-            inputService = ServiceLocator.Instance.GetService<InputService>();   
+        private void OnEnable() { 
             playerMovement = GetComponent<PlayerMovement>();
         }
 

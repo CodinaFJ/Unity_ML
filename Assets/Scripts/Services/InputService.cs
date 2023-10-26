@@ -59,8 +59,8 @@ public class InputService
 
 		private void LinkInput()
 		{
-			MoveAction += UpdateMovementVector;
 			inputActions.Player.Movement.performed += context => MoveAction?.Invoke(inputActions.Player.Movement.ReadValue<Vector2>());
+			MoveAction += UpdateMovementVector;
 		}
 
 		private void DisableInput()
@@ -70,7 +70,7 @@ public class InputService
 
 		private void UnlinkInputs()
 		{
-			MoveAction -= UpdateMovementVector;
 			inputActions.Player.Movement.performed -= context => MoveAction?.Invoke(inputActions.Player.Movement.ReadValue<Vector2>());
+			MoveAction -= UpdateMovementVector;
 		}
 	}
