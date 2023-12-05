@@ -43,8 +43,8 @@ public class MoveToGoalAgent : Agent
 
 	public override void CollectObservations(VectorSensor sensor)
 	{
-		sensor.AddObservation((Vector2) this.transform.position);
-		sensor.AddObservation((Vector2) target.position);
+		sensor.AddObservation((Vector2) this.transform.localPosition);
+		sensor.AddObservation((Vector2) target.localPosition);
 	}
 
 	public override void Heuristic(in ActionBuffers actionsOut)
