@@ -37,8 +37,8 @@ public class MoveToGoalAgent : Agent
 
 	public override void OnEpisodeBegin()
 	{
-		transform.localPosition = new Vector2(Random.Range(-7f, 0f), Random.Range(-3f, 3f));
-		target.transform.localPosition = new Vector2(Random.Range(7f, 0f), Random.Range(-3f, 3f));
+		transform.localPosition = new Vector2(Random.Range(-7f, 7f), Random.Range(-1f, 0f));
+		target.transform.localPosition = new Vector2(Random.Range(-7.5f, 7.5f), Random.Range(-0.35f, -3f));
 	}
 
 	public override void CollectObservations(VectorSensor sensor)
@@ -51,15 +51,19 @@ public class MoveToGoalAgent : Agent
 	{
 		ActionSegment<float> continuousAction = actionsOut.ContinuousActions;
 		continuousAction[0] = inputService.Movement.x;
-		continuousAction[1] = inputService.Movement.y;
+
+		ActionSegment<int> discreteActions = actionsOut.DiscreteActions;
+		discreteActions[0] = inputService.Jump > Mathf.Epsilon ? 1 : 0;
+		if (inputService.Jump > 0) inputService.Jump = 0;
 	}
 
 	public override void OnActionReceived(ActionBuffers actions)
 	{
 		float moveHorizontal = actions.ContinuousActions[0];
-		float moveVertical = actions.ContinuousActions[1];
+		int jump = actions.DiscreteActions[0];
 
-		playerMovement.Movement = new Vector2(moveHorizontal, moveVertical);
+		playerMovement.Movement = new Vector2(moveHorizontal, playerMovement.Movement.y);
+		if (jump == 1) playerMovement.Jump();
 	}
 
 	private void RegisterCollisionsReactions()

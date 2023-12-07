@@ -13,6 +13,7 @@ using UnityEngine;
         protected const string HORIZONTAL_DIRECTION = "horizontal";
         protected const string VERTICAL_DIRECTION = "vertical";
         protected const string IS_MOVING = "isMoving";
+		protected const string IS_AIR = "isAir";
 
         void Awake()
         {
