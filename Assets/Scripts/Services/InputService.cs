@@ -15,6 +15,7 @@ public class InputService
 		{
 			inputActions = new GameInputActions();
 
+
 			EnableInput();
 			LinkInput();
 			SetInputActive(true);
