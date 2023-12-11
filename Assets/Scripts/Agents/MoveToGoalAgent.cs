@@ -54,7 +54,6 @@ public class MoveToGoalAgent : Agent
 
 		ActionSegment<int> discreteActions = actionsOut.DiscreteActions;
 		discreteActions[0] = inputService.Jump > Mathf.Epsilon ? 1 : 0;
-		if (inputService.Jump > 0) inputService.Jump = 0;
 	}
 
 	public override void OnActionReceived(ActionBuffers actions)
