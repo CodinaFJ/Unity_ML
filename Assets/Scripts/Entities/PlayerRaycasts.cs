@@ -76,7 +76,7 @@ public class PlayerRaycasts : MonoBehaviour
 			if (id == -1)
 				continue ;
 			ids[i] = id;
-			this.LogDebug("Ray collision with " + ray.collider.tag + " with ID: " + ids[i]);
+			//this.LogDebug("Ray collision with " + ray.collider.tag + " with ID: " + ids[i]);
 			i++;
 		}
 		return ids;
