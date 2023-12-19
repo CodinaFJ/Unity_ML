@@ -989,11 +989,11 @@
       </summary>
       <param name="usageName">The name of the feature usage to query for.</param>
     </member>
-    <member name="?:UnityEngine.XR.InputFeatureUsage_1.op_Explicit(UnityEngine.XR.InputFeatureUsage`1&lt;T&gt;)">
+    <member name="?:UnityEngine.XR.InputFeatureUsage_1.explop_InputFeatureUsage(InputFeatureUsage&lt;T&gt;)(UnityEngine.XR.InputFeatureUsage`1&lt;T&gt;)">
       <summary>
         <para>Converts a generic InputFeatureUsage&lt;T&gt; into an InputFeatureUsage.</para>
       </summary>
-      <param name="self"></param>
+      <param name="self">The generic InputFeatureUsage_1 to conver into an InputFeatureUsage.</param>
     </member>
     <member name="T:UnityEngine.XR.InputTracking">
       <summary>
@@ -1425,6 +1425,21 @@ Gets the rotation of a specific node.</para>
                 </para>
       </summary>
     </member>
+    <member name="P:UnityEngine.XR.XRDisplaySubsystem.foveatedRenderingFlags">
+      <summary>
+        <para>Controls optional behavior of the foveated rendering system.</para>
+      </summary>
+    </member>
+    <member name="P:UnityEngine.XR.XRDisplaySubsystem.foveatedRenderingLevel">
+      <summary>
+        <para>Controls the intensity of the foveated rendering system.</para>
+      </summary>
+    </member>
+    <member name="P:UnityEngine.XR.XRDisplaySubsystem.hdrOutputSettings">
+      <summary>
+        <para>The HDROutputSettings for the XR Display Subsystem.</para>
+      </summary>
+    </member>
     <member name="P:UnityEngine.XR.XRDisplaySubsystem.occlusionMaskScale">
       <summary>
         <para>A scale applied to the standard occulsion mask.</para>
@@ -1505,6 +1520,21 @@ Gets the rotation of a specific node.</para>
       </summary>
       <param name="camera">The camera where late latch end recording is to be done.</param>
     </member>
+    <member name="T:UnityEngine.XR.XRDisplaySubsystem.FoveatedRenderingFlags">
+      <summary>
+        <para>Optional flags to control the foveated rendering system.</para>
+      </summary>
+    </member>
+    <member name="F:UnityEngine.XR.XRDisplaySubsystem.FoveatedRenderingFlags.GazeAllowed">
+      <summary>
+        <para>Allows the platform to use eye tracking to optimize foveated rendering.</para>
+      </summary>
+    </member>
+    <member name="F:UnityEngine.XR.XRDisplaySubsystem.FoveatedRenderingFlags.None">
+      <summary>
+        <para>The default behavior with no extra configuration flags.</para>
+      </summary>
+    </member>
     <member name="M:UnityEngine.XR.XRDisplaySubsystem.GetCullingParameters(UnityEngine.Camera,System.Int32,UnityEngine.Rendering.ScriptableCullingParameters&amp;)">
       <summary>
         <para>Gets culling parameters for a specific culling pass index.</para>
@@ -1556,6 +1586,15 @@ Gets the rotation of a specific node.</para>
       </summary>
       <returns>
         <para>Count of render passes.</para>
+      </returns>
+    </member>
+    <member name="M:UnityEngine.XR.XRDisplaySubsystem.GetRenderTexture(System.UInt32)">
+      <summary>
+        <para>Given the UnityXRRenderTextureID returned by IUnityXRDisplayInterface::CreateTexture, return the managed UnityEngine.RenderTexture instance.</para>
+      </summary>
+      <param name="unityXrRenderTextureId"></param>
+      <returns>
+        <para>The managed UnityEngine.RenderTexture instance associated with the UnityXRRenderTextureID</para>
       </returns>
     </member>
     <member name="M:UnityEngine.XR.XRDisplaySubsystem.GetRenderTextureForRenderPass(System.Int32)">
@@ -1745,6 +1784,26 @@ Gets the rotation of a specific node.</para>
         <para>Destination Rect area that the blit operation wants to blit to.</para>
       </summary>
     </member>
+    <member name="F:UnityEngine.XR.XRDisplaySubsystem.XRBlitParams.foveatedRenderingInfo">
+      <summary>
+        <para>A pointer to a native struct containing platform-specific data for foveated rendering.</para>
+      </summary>
+    </member>
+    <member name="F:UnityEngine.XR.XRDisplaySubsystem.XRBlitParams.srcHdrColorGamut">
+      <summary>
+        <para>The ColorGamut of the source texture if srcHdrEncoded is true.</para>
+      </summary>
+    </member>
+    <member name="F:UnityEngine.XR.XRDisplaySubsystem.XRBlitParams.srcHdrEncoded">
+      <summary>
+        <para>Specifies whether the source texture is encoded for use with an HDR display and might require decoding during the blit process.</para>
+      </summary>
+    </member>
+    <member name="F:UnityEngine.XR.XRDisplaySubsystem.XRBlitParams.srcHdrMaxLuminance">
+      <summary>
+        <para>The maximum luminance in nits of the encoding used for the source texture if srcHdrEncoded is true.</para>
+      </summary>
+    </member>
     <member name="F:UnityEngine.XR.XRDisplaySubsystem.XRBlitParams.srcRect">
       <summary>
         <para>Source Rect area that the blit operation wants to blit from.</para>
@@ -1835,6 +1894,11 @@ Gets the rotation of a specific node.</para>
     <member name="F:UnityEngine.XR.XRDisplaySubsystem.XRRenderPass.cullingPassIndex">
       <summary>
         <para>An index that a render pipeline can pass to XR.XRDisplaySubsystem.GetCullingParameters to obtain culling information.</para>
+      </summary>
+    </member>
+    <member name="F:UnityEngine.XR.XRDisplaySubsystem.XRRenderPass.foveatedRenderingInfo">
+      <summary>
+        <para>A pointer to a native struct containing platform-specific data for foveated rendering.</para>
       </summary>
     </member>
     <member name="F:UnityEngine.XR.XRDisplaySubsystem.XRRenderPass.hasMotionVectorPass">

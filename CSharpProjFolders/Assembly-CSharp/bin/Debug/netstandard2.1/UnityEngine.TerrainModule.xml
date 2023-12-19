@@ -44,9 +44,19 @@
         <para>Detail prototype used by the Terrain GameObject.</para>
       </summary>
     </member>
+    <member name="P:UnityEngine.DetailPrototype.alignToGround">
+      <summary>
+        <para>Rotate detail axis parallel to the ground's normal direction, so that the detail is perpendicular to the ground.</para>
+      </summary>
+    </member>
     <member name="P:UnityEngine.DetailPrototype.bendFactor">
       <summary>
         <para>Bend factor of the detailPrototype.</para>
+      </summary>
+    </member>
+    <member name="P:UnityEngine.DetailPrototype.density">
+      <summary>
+        <para>Controls detail density for this detail prototype, relative to it's size.</para>
       </summary>
     </member>
     <member name="P:UnityEngine.DetailPrototype.dryColor">
@@ -94,6 +104,11 @@
         <para>Controls the spatial frequency of the noise pattern used to vary the scale and color of the detail objects.</para>
       </summary>
     </member>
+    <member name="P:UnityEngine.DetailPrototype.positionJitter">
+      <summary>
+        <para>Controls how Unity generates the detail positions.</para>
+      </summary>
+    </member>
     <member name="P:UnityEngine.DetailPrototype.prototype">
       <summary>
         <para>GameObject used by the DetailPrototype.</para>
@@ -107,6 +122,16 @@
     <member name="P:UnityEngine.DetailPrototype.renderMode">
       <summary>
         <para>Render mode for the DetailPrototype.</para>
+      </summary>
+    </member>
+    <member name="P:UnityEngine.DetailPrototype.targetCoverage">
+      <summary>
+        <para>Controls the detail's target coverage.</para>
+      </summary>
+    </member>
+    <member name="P:UnityEngine.DetailPrototype.useDensityScaling">
+      <summary>
+        <para>Indicates the global density scale set in the terrain settings affects this detail prototype.</para>
       </summary>
     </member>
     <member name="P:UnityEngine.DetailPrototype.useInstancing">
@@ -149,6 +174,21 @@
     <member name="F:UnityEngine.DetailRenderMode.VertexLit">
       <summary>
         <para>Will show the prototype using diffuse shading.</para>
+      </summary>
+    </member>
+    <member name="T:UnityEngine.DetailScatterMode">
+      <summary>
+        <para>Provides options to specify how details are scattered on the terrain.</para>
+      </summary>
+    </member>
+    <member name="F:UnityEngine.DetailScatterMode.CoverageMode">
+      <summary>
+        <para>The detail map holds values that represent how much area to cover at each sample, based on the detail's density.</para>
+      </summary>
+    </member>
+    <member name="F:UnityEngine.DetailScatterMode.InstanceCountMode">
+      <summary>
+        <para>The detail map holds values that represent the number of detail instances to render at each sample.</para>
       </summary>
     </member>
     <member name="T:UnityEngine.PatchExtents">
@@ -291,6 +331,11 @@
         <para>Controls what part of the terrain should be rendered.</para>
       </summary>
     </member>
+    <member name="P:UnityEngine.Terrain.enableHeightmapRayTracing">
+      <summary>
+        <para>When this options is enabled, Terrain heightmap geometries will be added in acceleration structures used for Ray Tracing.</para>
+      </summary>
+    </member>
     <member name="P:UnityEngine.Terrain.groupingID">
       <summary>
         <para>Grouping ID for auto connect.</para>
@@ -324,6 +369,11 @@
     <member name="P:UnityEngine.Terrain.holesRenderTextureFormat">
       <summary>
         <para>Render texture format of the Terrain holes Texture.</para>
+      </summary>
+    </member>
+    <member name="P:UnityEngine.Terrain.ignoreQualitySettings">
+      <summary>
+        <para>When enabled, the terrain ignores the terrain overrides set in the QualitySettings.</para>
       </summary>
     </member>
     <member name="P:UnityEngine.Terrain.keepUnusedRenderingResources">
@@ -459,6 +509,11 @@
     <member name="P:UnityEngine.Terrain.treeMaximumFullLODCount">
       <summary>
         <para>Maximum number of trees rendered at full LOD.</para>
+      </summary>
+    </member>
+    <member name="P:UnityEngine.Terrain.treeMotionVectorModeOverride">
+      <summary>
+        <para>The motion vector rendering mode for all SpeedTree models painted on the terrain. </para>
       </summary>
     </member>
     <member name="M:UnityEngine.Terrain.AddTreeInstance(UnityEngine.TreeInstance)">
@@ -729,6 +784,11 @@
         <para>Detail Resolution of each patch. A larger value will decrease the number of batches used by detail objects.</para>
       </summary>
     </member>
+    <member name="P:UnityEngine.TerrainData.detailScatterMode">
+      <summary>
+        <para>See Also: DetailScatterMode</para>
+      </summary>
+    </member>
     <member name="P:UnityEngine.TerrainData.detailWidth">
       <summary>
         <para>The resolution of the detail data stored in TerrainData.</para>
@@ -772,6 +832,11 @@
     <member name="P:UnityEngine.TerrainData.holesTexture">
       <summary>
         <para>Returns the Terrain holes Texture.</para>
+      </summary>
+    </member>
+    <member name="P:UnityEngine.TerrainData.maxDetailScatterPerRes">
+      <summary>
+        <para>The maximum value of each sample in the detail map of the terrain data.</para>
       </summary>
     </member>
     <member name="P:UnityEngine.TerrainData.size">
@@ -833,6 +898,12 @@
       <summary>
         <para>The name for the Terrain alpha map textures.</para>
       </summary>
+    </member>
+    <member name="M:UnityEngine.TerrainData.ComputeDetailCoverage(System.Int32)">
+      <summary>
+        <para>This function computes and returns the coverage (how many instances fit in a square unit) of a detail prototype, given its index.</para>
+      </summary>
+      <param name="detailPrototypeIndex"></param>
     </member>
     <member name="M:UnityEngine.TerrainData.ComputeDetailInstanceTransforms(System.Int32,System.Int32,System.Int32,System.Single,UnityEngine.Bounds&amp;)">
       <summary>
@@ -1045,6 +1116,12 @@
         <para>Reloads all the values of the available prototypes (ie, detail mesh assets) in the TerrainData Object.</para>
       </summary>
     </member>
+    <member name="M:UnityEngine.TerrainData.RemoveDetailPrototype(System.Int32)">
+      <summary>
+        <para>Removes the detail prototype at the specified index.</para>
+      </summary>
+      <param name="index">The index of the detail prototype.</param>
+    </member>
     <member name="M:UnityEngine.TerrainData.SetAlphamaps(System.Int32,System.Int32,System.Single[,,])">
       <summary>
         <para>Assign all splat values in the given map area.</para>
@@ -1073,6 +1150,13 @@
       </summary>
       <param name="detailResolution">Specifies the number of pixels in the detail resolution map. A larger detailResolution, leads to more accurate detail object painting.</param>
       <param name="resolutionPerPatch">Specifies the size in pixels of each individually rendered detail patch. A larger number reduces draw calls, but might increase triangle count since detail patches are culled on a per batch basis. A recommended value is 16. If you use a very large detail object distance and your grass is very sparse, it makes sense to increase the value.</param>
+    </member>
+    <member name="M:UnityEngine.TerrainData.SetDetailScatterMode(UnityEngine.DetailScatterMode)">
+      <summary>
+        <para>Sets the DetailScatterMode.</para>
+      </summary>
+      <param name="detailScatterMode">Sets the DetailScatterMode that specifies how to represent detail density at each sample of the detail resolution map.</param>
+      <param name="scatterMode"></param>
     </member>
     <member name="M:UnityEngine.TerrainData.SetHeights(System.Int32,System.Int32,System.Single[,])">
       <summary>
@@ -1948,6 +2032,31 @@ Rotation of the tree on X-Z plane (in radians).</para>
     <member name="F:UnityEngine.TreeInstance.widthScale">
       <summary>
         <para>Width scale of this instance (compared to the prototype's size).</para>
+      </summary>
+    </member>
+    <member name="T:UnityEngine.TreeMotionVectorModeOverride">
+      <summary>
+        <para>Options for motion vector rendering on the terrain.</para>
+      </summary>
+    </member>
+    <member name="F:UnityEngine.TreeMotionVectorModeOverride.CameraMotionOnly">
+      <summary>
+        <para>Use only camera movement to track motion for all SpeedTree models painted on the terrain.</para>
+      </summary>
+    </member>
+    <member name="F:UnityEngine.TreeMotionVectorModeOverride.ForceNoMotion">
+      <summary>
+        <para>Don't track motion for SpeedTree models painted on the terrain. Note that models are still rendered in the object motion vector pass, so the CPU performance is similar to `Per Object Motion`.</para>
+      </summary>
+    </member>
+    <member name="F:UnityEngine.TreeMotionVectorModeOverride.InheritFromPrototype">
+      <summary>
+        <para>For each SpeedTree model painted on the terrain, inherit the motion vector rendering mode from the import settings, instead of a terrain-global value.</para>
+      </summary>
+    </member>
+    <member name="F:UnityEngine.TreeMotionVectorModeOverride.PerObjectMotion">
+      <summary>
+        <para>Use a specific pass to track motion for all SpeedTree models painted on the terrain.</para>
       </summary>
     </member>
     <member name="T:UnityEngine.TreePrototype">

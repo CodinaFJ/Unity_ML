@@ -102,7 +102,7 @@
     </member>
     <member name="M:UnityEngine.Animation.CrossFade(System.String)">
       <summary>
-        <para>Fades the animation with name animation in over a period of time seconds and fades other animations out.</para>
+        <para>Fades in the animation with the name animation over a period of time defined by fadeLength.</para>
       </summary>
       <param name="animation"></param>
       <param name="fadeLength"></param>
@@ -110,7 +110,7 @@
     </member>
     <member name="M:UnityEngine.Animation.CrossFade(System.String,System.Single)">
       <summary>
-        <para>Fades the animation with name animation in over a period of time seconds and fades other animations out.</para>
+        <para>Fades in the animation with the name animation over a period of time defined by fadeLength.</para>
       </summary>
       <param name="animation"></param>
       <param name="fadeLength"></param>
@@ -118,7 +118,7 @@
     </member>
     <member name="M:UnityEngine.Animation.CrossFade(System.String,System.Single,UnityEngine.PlayMode)">
       <summary>
-        <para>Fades the animation with name animation in over a period of time seconds and fades other animations out.</para>
+        <para>Fades in the animation with the name animation over a period of time defined by fadeLength.</para>
       </summary>
       <param name="animation"></param>
       <param name="fadeLength"></param>
@@ -2780,6 +2780,24 @@
         <para>The scale of the transform relative to the parent.</para>
       </returns>
     </member>
+    <member name="M:UnityEngine.Animations.TransformSceneHandle.GetLocalToParentMatrix(UnityEngine.Animations.AnimationStream)">
+      <summary>
+        <para>Gets the local to parent matrix of the transform.</para>
+      </summary>
+      <param name="stream">The AnimationStream that manages this handle.</param>
+      <returns>
+        <para>Returns the local to parent matrix.</para>
+      </returns>
+    </member>
+    <member name="M:UnityEngine.Animations.TransformSceneHandle.GetLocalToWorldMatrix(UnityEngine.Animations.AnimationStream)">
+      <summary>
+        <para>Gets the local to world matrix of the transform.</para>
+      </summary>
+      <param name="stream">The AnimationStream that manages this handle.</param>
+      <returns>
+        <para>Returns the local to world matrix.</para>
+      </returns>
+    </member>
     <member name="M:UnityEngine.Animations.TransformSceneHandle.GetLocalTRS(UnityEngine.Animations.AnimationStream,UnityEngine.Vector3&amp;,UnityEngine.Quaternion&amp;,UnityEngine.Vector3&amp;)">
       <summary>
         <para>Gets the position, rotation and scale of the transform relative to the parent.</para>
@@ -2889,6 +2907,24 @@
       <param name="stream">The AnimationStream that holds the animated values.</param>
       <returns>
         <para>The scale of the transform relative to the parent.</para>
+      </returns>
+    </member>
+    <member name="M:UnityEngine.Animations.TransformStreamHandle.GetLocalToParentMatrix(UnityEngine.Animations.AnimationStream)">
+      <summary>
+        <para>Gets the local to parent matrix of the transform.</para>
+      </summary>
+      <param name="stream">The AnimationStream that holds the animated values.</param>
+      <returns>
+        <para>Returns the local to parent matrix.</para>
+      </returns>
+    </member>
+    <member name="M:UnityEngine.Animations.TransformStreamHandle.GetLocalToWorldMatrix(UnityEngine.Animations.AnimationStream)">
+      <summary>
+        <para>Gets the local to world matrix of the transform.</para>
+      </summary>
+      <param name="stream">The AnimationStream that holds the animated values.</param>
+      <returns>
+        <para>Returns the local to world matrix.</para>
       </returns>
     </member>
     <member name="M:UnityEngine.Animations.TransformStreamHandle.GetLocalTRS(UnityEngine.Animations.AnimationStream,UnityEngine.Vector3&amp;,UnityEngine.Quaternion&amp;,UnityEngine.Vector3&amp;)">
@@ -3128,6 +3164,11 @@
         <para>Gets/Sets the current Avatar.</para>
       </summary>
     </member>
+    <member name="P:UnityEngine.Animator.avatarRoot">
+      <summary>
+        <para>Returns the Avatar root Transform.</para>
+      </summary>
+    </member>
     <member name="P:UnityEngine.Animator.bodyPosition">
       <summary>
         <para>The position of the body center of mass.</para>
@@ -3209,6 +3250,11 @@
       </summary>
     </member>
     <member name="P:UnityEngine.Animator.keepAnimatorControllerStateOnDisable">
+      <summary>
+        <para>Controls the behaviour of the Animator component when a GameObject is disabled.</para>
+      </summary>
+    </member>
+    <member name="P:UnityEngine.Animator.keepAnimatorStateOnDisable">
       <summary>
         <para>Controls the behaviour of the Animator component when a GameObject is disabled.</para>
       </summary>
@@ -3328,6 +3374,11 @@
         <para>Gets the avatar velocity  for the last evaluated frame.</para>
       </summary>
     </member>
+    <member name="P:UnityEngine.Animator.writeDefaultValuesOnDisable">
+      <summary>
+        <para>Specifies whether playable graph values are reset or preserved when the Animator is disabled.</para>
+      </summary>
+    </member>
     <member name="M:UnityEngine.Animator.ApplyBuiltinRootMotion">
       <summary>
         <para>Apply the default Root Motion.</para>
@@ -3398,9 +3449,12 @@
     </member>
     <member name="M:UnityEngine.Animator.GetBoneTransform(UnityEngine.HumanBodyBones)">
       <summary>
-        <para>Returns Transform mapped to this human bone id. Returns null if the animator is disabled, if it does not have a human description, or if the bone id is invalid.</para>
+        <para>Retrieves the Transform mapped to a human bone based on its id.</para>
       </summary>
-      <param name="humanBoneId">The human bone that is queried, see enum HumanBodyBones for a list of possible values.</param>
+      <param name="humanBoneId">The human bone to be queried. See the HumanBodyBones enum for a list of possible values.</param>
+      <returns>
+        <para>Returns the Transform mapped to the human bone. Returns null if the human bone has no Transform.</para>
+      </returns>
     </member>
     <member name="M:UnityEngine.Animator.GetBool(System.String)">
       <summary>
@@ -3910,7 +3964,7 @@
       <param name="bodyWeight">(0-1) determines how much the body is involved in the LookAt.</param>
       <param name="headWeight">(0-1) determines how much the head is involved in the LookAt.</param>
       <param name="eyesWeight">(0-1) determines how much the eyes are involved in the LookAt.</param>
-      <param name="clampWeight">(0-1) 0.0 means the character is completely unrestrained in motion, 1.0 means he's completely clamped (look at becomes impossible), and 0.5 means he'll be able to move on half of the possible range (180 degrees).</param>
+      <param name="clampWeight">(0-1) 0.0 means the character is unrestrained in motion. 1.0 means the character is clamped (look at becomes impossible). 0.5 means the character is able to move on half of the possible range (180 degrees).</param>
     </member>
     <member name="M:UnityEngine.Animator.SetLookAtWeight(System.Single,System.Single)">
       <summary>
@@ -3920,7 +3974,7 @@
       <param name="bodyWeight">(0-1) determines how much the body is involved in the LookAt.</param>
       <param name="headWeight">(0-1) determines how much the head is involved in the LookAt.</param>
       <param name="eyesWeight">(0-1) determines how much the eyes are involved in the LookAt.</param>
-      <param name="clampWeight">(0-1) 0.0 means the character is completely unrestrained in motion, 1.0 means he's completely clamped (look at becomes impossible), and 0.5 means he'll be able to move on half of the possible range (180 degrees).</param>
+      <param name="clampWeight">(0-1) 0.0 means the character is unrestrained in motion. 1.0 means the character is clamped (look at becomes impossible). 0.5 means the character is able to move on half of the possible range (180 degrees).</param>
     </member>
     <member name="M:UnityEngine.Animator.SetLookAtWeight(System.Single,System.Single,System.Single)">
       <summary>
@@ -3930,7 +3984,7 @@
       <param name="bodyWeight">(0-1) determines how much the body is involved in the LookAt.</param>
       <param name="headWeight">(0-1) determines how much the head is involved in the LookAt.</param>
       <param name="eyesWeight">(0-1) determines how much the eyes are involved in the LookAt.</param>
-      <param name="clampWeight">(0-1) 0.0 means the character is completely unrestrained in motion, 1.0 means he's completely clamped (look at becomes impossible), and 0.5 means he'll be able to move on half of the possible range (180 degrees).</param>
+      <param name="clampWeight">(0-1) 0.0 means the character is unrestrained in motion. 1.0 means the character is clamped (look at becomes impossible). 0.5 means the character is able to move on half of the possible range (180 degrees).</param>
     </member>
     <member name="M:UnityEngine.Animator.SetLookAtWeight(System.Single,System.Single,System.Single,System.Single)">
       <summary>
@@ -3940,7 +3994,7 @@
       <param name="bodyWeight">(0-1) determines how much the body is involved in the LookAt.</param>
       <param name="headWeight">(0-1) determines how much the head is involved in the LookAt.</param>
       <param name="eyesWeight">(0-1) determines how much the eyes are involved in the LookAt.</param>
-      <param name="clampWeight">(0-1) 0.0 means the character is completely unrestrained in motion, 1.0 means he's completely clamped (look at becomes impossible), and 0.5 means he'll be able to move on half of the possible range (180 degrees).</param>
+      <param name="clampWeight">(0-1) 0.0 means the character is unrestrained in motion. 1.0 means the character is clamped (look at becomes impossible). 0.5 means the character is able to move on half of the possible range (180 degrees).</param>
     </member>
     <member name="M:UnityEngine.Animator.SetLookAtWeight(System.Single,System.Single,System.Single,System.Single,System.Single)">
       <summary>
@@ -3950,7 +4004,7 @@
       <param name="bodyWeight">(0-1) determines how much the body is involved in the LookAt.</param>
       <param name="headWeight">(0-1) determines how much the head is involved in the LookAt.</param>
       <param name="eyesWeight">(0-1) determines how much the eyes are involved in the LookAt.</param>
-      <param name="clampWeight">(0-1) 0.0 means the character is completely unrestrained in motion, 1.0 means he's completely clamped (look at becomes impossible), and 0.5 means he'll be able to move on half of the possible range (180 degrees).</param>
+      <param name="clampWeight">(0-1) 0.0 means the character is unrestrained in motion. 1.0 means the character is clamped (look at becomes impossible). 0.5 means the character is able to move on half of the possible range (180 degrees).</param>
     </member>
     <member name="M:UnityEngine.Animator.SetQuaternion(System.String,UnityEngine.Quaternion)">
       <summary>
@@ -4354,7 +4408,7 @@
     </member>
     <member name="M:UnityEngine.AnimatorUtility.OptimizeTransformHierarchy(UnityEngine.GameObject,System.String[])">
       <summary>
-        <para>This function will remove all transform hierarchy under GameObject, the animator will write directly transform matrices into the skin mesh matrices saving alot of CPU cycles.</para>
+        <para>This function will remove all transform hierarchy under GameObject, the animator will write directly transform matrices into the skin mesh matrices saving many CPU cycles.</para>
       </summary>
       <param name="go">GameObject to Optimize.</param>
       <param name="exposedTransforms">List of transform name to expose.</param>
@@ -5639,7 +5693,9 @@ Each joint local transform is represented by 3 floats for the translation and 4 
     </member>
     <member name="M:UnityEngine.Playables.AnimationPlayableUtilities.Play(UnityEngine.Animator,UnityEngine.Playables.Playable,UnityEngine.Playables.PlayableGraph)">
       <summary>
-        <para>Plays the Playable on  the given Animator.</para>
+        <para>Plays the Playable on  the given Animator.
+
+                    Note: This method is deprecated as it overrides the Time Update Mode of the Playable Graph. For an equivalent function, refer to the example below.</para>
       </summary>
       <param name="animator">Target Animator.</param>
       <param name="playable">The Playable that will be played.</param>
@@ -5731,7 +5787,7 @@ Each joint local transform is represented by 3 floats for the translation and 4 
     </member>
     <member name="T:UnityEngine.SharedBetweenAnimatorsAttribute">
       <summary>
-        <para>SharedBetweenAnimatorsAttribute is an attribute that specify that this StateMachineBehaviour should be instantiate only once and shared among all Animator instance. This attribute reduce the memory footprint for each controller instance.</para>
+        <para>The SharedBetweenAnimatorsAttribute specifies that this StateMachineBehaviour is instantiated only once and shared by all Animator instances. This attribute reduces the memory footprint for each controller instance.</para>
       </summary>
     </member>
     <member name="T:UnityEngine.SkeletonBone">

@@ -62,27 +62,28 @@
     </member>
     <member name="T:UnityEngine.Video.VideoAspectRatio">
       <summary>
-        <para>Methods used to fit a video in the target area.</para>
+        <para>Methods used to fit a video in the target area. If you're rendering a video into a RenderTexture, and the aspect ratio of the RenderTexture doesn't match that of the video being rendered, the VideoPlayer automatically adds black bars around the video. If you're rendering a video into a Camera, any area around the video remains transparent.</para>
       </summary>
     </member>
     <member name="F:UnityEngine.Video.VideoAspectRatio.FitHorizontally">
       <summary>
-        <para>Resize proportionally so that width fits the target area, cropping or adding black bars above and below if needed.</para>
+        <para>Resize the image proportionally so that the width fits the target area. The VideoPlayer automatically crops the image if needed.</para>
       </summary>
     </member>
     <member name="F:UnityEngine.Video.VideoAspectRatio.FitInside">
       <summary>
-        <para>Resize proportionally so that content fits the target area, adding black bars if needed.</para>
+        <para>Resize the image proportionally so that the content fits the target area.</para>
       </summary>
     </member>
     <member name="F:UnityEngine.Video.VideoAspectRatio.FitOutside">
       <summary>
-        <para>Resize proportionally so that content fits the target area, cropping if needed.</para>
+        <para>Resize the image proportionally so that the content fits the target area. The VideoPlayer automatically crops the image if needed.</para>
       </summary>
     </member>
     <member name="F:UnityEngine.Video.VideoAspectRatio.FitVertically">
       <summary>
-        <para>Resize proportionally so that height fits the target area, cropping or adding black bars on each side if needed.</para>
+        <para>
+                    Resize the image proportionally so that the height fits the target area. The VideoPlayer automatically crops the image if needed.</para>
       </summary>
     </member>
     <member name="F:UnityEngine.Video.VideoAspectRatio.NoScaling">
@@ -92,7 +93,7 @@
     </member>
     <member name="F:UnityEngine.Video.VideoAspectRatio.Stretch">
       <summary>
-        <para>Resize non-proportionally to fit the target area.</para>
+        <para>Resize the image non-proportionally to fit the target area.</para>
       </summary>
     </member>
     <member name="T:UnityEngine.Video.VideoAudioOutputMode">
@@ -229,7 +230,7 @@
     </member>
     <member name="P:UnityEngine.Video.VideoPlayer.canSetPlaybackSpeed">
       <summary>
-        <para>Whether the playback speed can be changed. (Read Only)</para>
+        <para>Whether you can change the playback speed. (Read Only)</para>
       </summary>
     </member>
     <member name="P:UnityEngine.Video.VideoPlayer.canSetSkipOnDrop">
@@ -239,12 +240,17 @@
     </member>
     <member name="P:UnityEngine.Video.VideoPlayer.canSetTime">
       <summary>
-        <para>Whether current time can be changed using the time or timeFrames property. (Read Only)</para>
+        <para>Whether you can change the current time using the time or timeFrames property. (Read Only)</para>
       </summary>
     </member>
     <member name="P:UnityEngine.Video.VideoPlayer.canSetTimeSource">
       <summary>
-        <para>Whether the time source followed by the VideoPlayer can be changed. (Read Only)</para>
+        <para>[DEPRECATED] Whether you can change the time source followed by the VideoPlayer. (Read Only)</para>
+      </summary>
+    </member>
+    <member name="P:UnityEngine.Video.VideoPlayer.canSetTimeUpdateMode">
+      <summary>
+        <para>Whether you can change the time source followed by the VideoPlayer. (Read Only)</para>
       </summary>
     </member>
     <member name="P:UnityEngine.Video.VideoPlayer.canStep">
@@ -457,7 +463,12 @@
     </member>
     <member name="P:UnityEngine.Video.VideoPlayer.timeSource">
       <summary>
-        <para>[NOT YET IMPLEMENTED] The source used used by the VideoPlayer to derive its current time.</para>
+        <para>[DEPRECATED] The source used by the VideoPlayer to derive its current time.</para>
+      </summary>
+    </member>
+    <member name="P:UnityEngine.Video.VideoPlayer.timeUpdateMode">
+      <summary>
+        <para>The clock source used by the VideoPlayer to derive its current time.</para>
       </summary>
     </member>
     <member name="P:UnityEngine.Video.VideoPlayer.url">
@@ -683,7 +694,7 @@
     </member>
     <member name="T:UnityEngine.Video.VideoTimeSource">
       <summary>
-        <para>Time source followed by the Video.VideoPlayer when reading content.</para>
+        <para>[DEPRECATED] Time source followed by the Video.VideoPlayer when reading content.</para>
       </summary>
     </member>
     <member name="F:UnityEngine.Video.VideoTimeSource.AudioDSPTimeSource">
@@ -694,6 +705,26 @@
     <member name="F:UnityEngine.Video.VideoTimeSource.GameTimeSource">
       <summary>
         <para>The unscaled game time as defined by Time.realtimeSinceStartup.</para>
+      </summary>
+    </member>
+    <member name="T:UnityEngine.Video.VideoTimeUpdateMode">
+      <summary>
+        <para>Defines the time source used to update Video.VideoPlayer when reading content.</para>
+      </summary>
+    </member>
+    <member name="F:UnityEngine.Video.VideoTimeUpdateMode.DSPTime">
+      <summary>
+        <para>Update time based on the DSP (Digital Signal Processing) clock. Use this value to synchronize playback with Audio.</para>
+      </summary>
+    </member>
+    <member name="F:UnityEngine.Video.VideoTimeUpdateMode.GameTime">
+      <summary>
+        <para>Update time based on Time.time. Use this value to synchronize playback with gameplay and to pause updates when gameplay is paused.</para>
+      </summary>
+    </member>
+    <member name="F:UnityEngine.Video.VideoTimeUpdateMode.UnscaledGameTime">
+      <summary>
+        <para>Update time based on Time.unscaledTime. Use this value to synchronize playback with gameplay and to continue updates when gameplay is paused. For example, use this mode for menu transitions that are updated while the game is paused.</para>
       </summary>
     </member>
   </members>
