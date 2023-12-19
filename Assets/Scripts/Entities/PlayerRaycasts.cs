@@ -7,9 +7,17 @@ public class PlayerRaycasts : MonoBehaviour
 	[SerializeField] int	numberOfRaysUp = 7;
 	[SerializeField] int	numberOfRaysDown = 3;
 	[SerializeField] private LayerMask recognizableLayerMask;
-	const float	RAY_LENGHT = 10;
+	const float	RAY_LENGHT = 30;
 
-	public RaycastHit2D[]	RecognitionRayHits;		
+	public RaycastHit2D[]	RecognitionRayHits;
+
+	private List<string> gameTags = new(){
+		"Untagged",
+		"Player",
+		"Reward",
+		"Punish",
+		"Ground"
+	};
 
 	private void Awake() 
 	{
@@ -62,7 +70,12 @@ public class PlayerRaycasts : MonoBehaviour
 
 		foreach(var ray in RecognitionRayHits)
 		{
-			ids[i] = GameTag.GetGameTagId(ray.collider.tag);
+			if (ray.collider == null)
+				continue ;
+			int	id = GameTag.GetGameTagId(ray.collider.tag);
+			if (id == -1)
+				continue ;
+			ids[i] = id;
 			this.LogDebug("Ray collision with " + ray.collider.tag + " with ID: " + ids[i]);
 			i++;
 		}

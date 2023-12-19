@@ -9,16 +9,13 @@ public static class GameTag
 	public const string PUNISH			= "Punish";
 	public const string GROUND			= "Ground";
 
-	private static readonly List<string> gameTags = new ();
-
-	static GameTag()
-	{
-		gameTags.Add(UNTAGGED);
-		gameTags.Add(PLAYER);
-		gameTags.Add(REWARD);
-		gameTags.Add(PUNISH);
-		gameTags.Add(GROUND);
-	}
+	private static readonly List<string> gameTags = new(){
+		UNTAGGED,
+		PLAYER,
+		REWARD,
+		PUNISH,
+		GROUND
+	};
 
 	public static int 	GetGameTagId(string tag)
 	{
