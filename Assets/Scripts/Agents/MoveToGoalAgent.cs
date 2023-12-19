@@ -44,7 +44,11 @@ public class MoveToGoalAgent : Agent
 	public override void CollectObservations(VectorSensor sensor)
 	{
 		sensor.AddObservation((Vector2) this.transform.localPosition);
-		sensor.AddObservation((Vector2) target.localPosition);
+		//sensor.AddObservation((Vector2) target.localPosition);
+		foreach (var distance in GetComponent<PlayerRaycasts>().GetRayCollisionDistances())
+			sensor.AddObservation(distance);
+		foreach(var id in GetComponent<PlayerRaycasts>().GetRayCollisionIDs())
+			sensor.AddObservation(id);
 	}
 
 	public override void Heuristic(in ActionBuffers actionsOut)

@@ -4,8 +4,9 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - reward
-  - punish
+  - Ground
+  - Reward
+  - Punish
   layers:
   - Default
   - TransparentFX

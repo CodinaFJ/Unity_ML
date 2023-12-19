@@ -55,17 +55,17 @@ public class PlayerCollisions : MonoBehaviour
 
 	protected virtual void OnCollisionEnter2D(Collision2D other)
 	{
-		if (other.gameObject.CompareTag("reward"))
+		if (other.gameObject.CompareTag(GameTag.REWARD))
 			CollisionWithRewardAction?.Invoke();
-		else if (other.gameObject.CompareTag("punish"))
+		else if (other.gameObject.CompareTag(GameTag.PUNISH))
 			CollisionWithPunishAction?.Invoke();
 	}
 
 	protected virtual void OnTriggerEnter2D(Collider2D other)
 	{
-		if (other.gameObject.CompareTag("reward"))
+		if (other.gameObject.CompareTag(GameTag.REWARD))
 			TriggerWithRewardAction?.Invoke();
-		else if (other.gameObject.CompareTag("punish"))
+		else if (other.gameObject.CompareTag(GameTag.PUNISH))
 			TriggerWithPunishAction?.Invoke();
 	}
 
