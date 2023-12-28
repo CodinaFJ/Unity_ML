@@ -55,7 +55,7 @@ public class MoveToGoalAgent : Agent
 	{
 		ActionSegment<float> continuousAction = actionsOut.ContinuousActions;
 		continuousAction[0] = Mathf.Clamp(inputService.Movement.x, 0, 1);
-		continuousAction[1] = Mathf.Clamp(inputService.Movement.x, -1, 0);
+		continuousAction[1] = Mathf.Abs(Mathf.Clamp(inputService.Movement.x, -1, 0));
 
 		ActionSegment<int> discreteActions = actionsOut.DiscreteActions;
 		discreteActions[0] = inputService.Jump > Mathf.Epsilon ? 1 : 0;
@@ -67,7 +67,7 @@ public class MoveToGoalAgent : Agent
 		float moveLeft = actions.ContinuousActions[1];
 		int jump = actions.DiscreteActions[0];
 
-		playerMovement.Movement = new Vector2(moveRight + moveLeft, playerMovement.Movement.y);
+		playerMovement.Movement = new Vector2(moveRight - moveLeft, playerMovement.Movement.y);
 		if (jump == 1) playerMovement.Jump();
 	}
 
