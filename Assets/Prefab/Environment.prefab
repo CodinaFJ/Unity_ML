@@ -598,8 +598,8 @@ Transform:
   m_GameObject: {fileID: 5137566444874972882}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.11, y: 1.63, z: 0}
-  m_LocalScale: {x: 2, y: 2, z: 1}
+  m_LocalPosition: {x: -0.11, y: 0.4826, z: 0}
+  m_LocalScale: {x: 2, y: 1.7758279, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 101541416872827111}
@@ -2246,7 +2246,7 @@ MonoBehaviour:
   hasUpgradedFromAgentParameters: 1
   MaxStep: 500
   target: {fileID: 3682431394744314342}
-  goalReward: 1
+  goalReward: 10
   wallPunishment: 1
   winMask: {fileID: 4991967883669074306}
   loseMask: {fileID: 4350180062289318579}
