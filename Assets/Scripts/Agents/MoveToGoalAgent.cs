@@ -55,6 +55,7 @@ public class MoveToGoalAgent : Agent
 
 	public override void OnEpisodeBegin()
 	{
+		episodeTimeElapsed = 0;
 		transform.localPosition = new Vector2(Random.Range(-7f, 7f), Random.Range(-1f, 0f));
 		target.transform.localPosition = new Vector2(Random.Range(-7.5f, 7.5f), Random.Range(-0.35f, -3f));
 	}
