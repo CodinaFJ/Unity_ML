@@ -64,3 +64,4 @@ Thumbs.db.meta
 
 # Virtual environment
 venv/
+Assets/ML-Agents/Timers/*

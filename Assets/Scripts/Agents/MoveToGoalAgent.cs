@@ -8,12 +8,15 @@ public class MoveToGoalAgent : Agent
 	[SerializeField] private Transform target;
 	[SerializeField] private float goalReward;
 	[SerializeField] private float wallPunishment;
+	[SerializeField] private float finishEpisodePunishment = -1;
 	[SerializeField] private GameObject winMask;
 	[SerializeField] private GameObject loseMask;
+	[SerializeField] private float episodeTimeLimit = 10;
 
 	private InputService 		inputService;
 	private PlayerCollisions	playerCollisions;
 	private PlayerMovement		playerMovement;
+	private float				episodeTimeElapsed;
 
 	protected void Start() 
 	{
@@ -24,6 +27,21 @@ public class MoveToGoalAgent : Agent
 		loseMask.SetActive(false);
 
 		RegisterCollisionsReactions();
+	}
+
+	private void Update() 
+	{
+		CheckEndEpisode();	
+	}
+
+	private void CheckEndEpisode()
+	{
+		episodeTimeElapsed += Time.deltaTime;
+		if (episodeTimeElapsed > episodeTimeLimit)
+		{
+			episodeTimeElapsed = 0;
+			Reinforce(finishEpisodePunishment, true);
+		}
 	}
 
 	protected override void OnDisable() 
@@ -95,5 +113,17 @@ public class MoveToGoalAgent : Agent
 		winMask.SetActive(false);
 		loseMask.SetActive(true);
 		EndEpisode();
+	}
+
+	public void Reinforce(float value, bool endEpisode)
+	{
+		SetReward(value);
+		if (endEpisode)
+		{
+			bool win = value > 0;
+			winMask.SetActive(win);
+			loseMask.SetActive(!win);
+			EndEpisode();
+		}
 	}
 }
