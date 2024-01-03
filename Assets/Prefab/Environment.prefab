@@ -2198,7 +2198,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BrainParameters:
-    VectorObservationSize: 22
+    VectorObservationSize: 44
     NumStackedVectorObservations: 1
     m_ActionSpec:
       m_NumContinuousActions: 2
@@ -2248,8 +2248,10 @@ MonoBehaviour:
   target: {fileID: 3682431394744314342}
   goalReward: 10
   wallPunishment: 1
+  finishEpisodePunishment: -1
   winMask: {fileID: 4991967883669074306}
   loseMask: {fileID: 4350180062289318579}
+  episodeTimeLimit: 10
 --- !u!114 &6995367651796604439
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2308,6 +2310,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   numberOfRaysUp: 7
   numberOfRaysDown: 3
+  numberOfRaysSide: 6
   recognizableLayerMask:
     serializedVersion: 2
     m_Bits: 64
