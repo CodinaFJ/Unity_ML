@@ -2244,7 +2244,7 @@ MonoBehaviour:
   agentParameters:
     maxStep: 0
   hasUpgradedFromAgentParameters: 1
-  MaxStep: 10000
+  MaxStep: 1000
   target: {fileID: 3682431394744314342}
   goalReward: 10
   wallPunishment: 1
