@@ -8,17 +8,29 @@ public static class GameTag
 	public const string REWARD			= "Reward";
 	public const string PUNISH			= "Punish";
 	public const string GROUND			= "Ground";
+	public const string SPAWN			= "Spawn";
 
 	private static readonly List<string> gameTags = new(){
 		UNTAGGED,
 		PLAYER,
 		REWARD,
 		PUNISH,
-		GROUND
+		GROUND,
+		SPAWN
 	};
 
 	public static int 	GetGameTagId(string tag)
 	{
 		return gameTags.IndexOf(tag);
 	}
+}
+
+public enum Tag
+{
+	Untagged,
+	Player,
+	Reward,
+	Punish,
+	Ground,
+	Spawn
 }

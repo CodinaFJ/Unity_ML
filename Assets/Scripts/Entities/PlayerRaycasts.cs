@@ -42,7 +42,6 @@ public class PlayerRaycasts : MonoBehaviour
 		for (int i = 0 ; i < numberOfRaysSide * 2; i += 2)
 		{
 			float pos_y =  transform.position.y - 1.7f + 4 * (1 - ((float) j) / numberOfRaysSide);
-			this.LogDebug("Start point (" + pos_y + "): " + new Vector2(transform.position.x, pos_y));
 			RecognitionRayHits[i + numberOfRaysUp + numberOfRaysDown] =
 				CastRayParallel(new Vector2(transform.position.x, pos_y), Vector2.right);
 

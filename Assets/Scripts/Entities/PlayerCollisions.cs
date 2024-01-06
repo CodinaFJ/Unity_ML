@@ -68,7 +68,7 @@ public class PlayerCollisions : MonoBehaviour
 		else if (other.gameObject.CompareTag(GameTag.PUNISH))
 			TriggerWithPunishAction?.Invoke();
 	}
-
+	
 	private void CheckOnGround()
 	{
 		RaycastHit2D raycastHit2D1 = Physics2D.Raycast( (Vector2) transform.position + new Vector2(coyoteExtension, 0), Vector2.down, preJumpBuffer, jumpableLayerMask);

@@ -15,15 +15,17 @@ public class MoveToGoalAgent : Agent
 	[SerializeField] private float episodeTimeLimit = 10;
 
 	private InputService 		inputService;
+	private SpawnService 		spawnService;
 	private PlayerCollisions	playerCollisions;
 	private PlayerMovement		playerMovement;
 	private float				episodeTimeElapsed;
-	private float actionPunishmentReduction;
-	private int contadorAcciones;
+	private float 				actionPunishmentReduction;
+	private int 				contadorAcciones;
 
 	protected void Start() 
 	{
 		inputService = ServiceLocator.Instance.GetService<InputService>();
+		spawnService = ServiceLocator.Instance.GetService<SpawnService>();
 		playerCollisions = GetComponent<PlayerCollisions>();
 		playerMovement = GetComponent<PlayerMovement>();
 		winMask.SetActive(false);
@@ -34,7 +36,7 @@ public class MoveToGoalAgent : Agent
 
 	private void Update() 
 	{
-		CheckEndEpisode();	
+		CheckEndEpisode();
 	}
 
 	private void CheckEndEpisode()
@@ -58,10 +60,20 @@ public class MoveToGoalAgent : Agent
 
 	public override void OnEpisodeBegin()
 	{
+		Vector2 agentPosition;
 		episodeTimeElapsed = 0;
 		contadorAcciones = 0;  // JM: variable de test para ver cuantas acciones se hacen de media hasta alcanzar el objetivo
-		transform.localPosition = new Vector2(Random.Range(-7f, 7f), Random.Range(-1f, 0f));
+		do
+		{
+			agentPosition = new Vector2(Random.Range(-7f, 7f), Random.Range(-1f, 0f));
+			transform.localPosition = agentPosition;
+		} while (!AssertSpawn(transform.position));
 		target.transform.localPosition = new Vector2(Random.Range(-7.5f, 7.5f), Random.Range(-0.35f, -3f));
+	}
+
+	private bool AssertSpawn(Vector2 pos)
+	{
+		return spawnService.AssertObjectSpawnedInZone(pos, this.gameObject.tag);
 	}
 
 	public override void CollectObservations(VectorSensor sensor)
@@ -96,7 +108,7 @@ public class MoveToGoalAgent : Agent
 			playerMovement.Jump();
 			AddReward(-0.1f); // Se da un pequeño punishment cada vez que salta para evitar que salte en exceso
 		} 
-		this.LogInfo("Numero de acciones: " + contadorAcciones);
+		//this.LogInfo("Numero de acciones: " + contadorAcciones);
 	}
 
 	private void RegisterCollisionsReactions()

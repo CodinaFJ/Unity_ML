@@ -6,6 +6,7 @@ public class ServicesController : MonoBehaviour
 	{
 		ServiceLocator.Instance.RegisterService(new LoggerService());
 		ServiceLocator.Instance.RegisterService(new InputService());
+		ServiceLocator.Instance.RegisterService(new SpawnService());
 		this.LogInfo("Services registered");
 	}
 }
