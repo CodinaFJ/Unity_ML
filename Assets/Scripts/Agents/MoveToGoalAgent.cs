@@ -22,6 +22,8 @@ public class MoveToGoalAgent : Agent
 	private float 				actionPunishmentReduction;
 	private int 				contadorAcciones;
 
+	public EnvironmentController	environmentController;
+
 	protected void Start() 
 	{
 		inputService = ServiceLocator.Instance.GetService<InputService>();
@@ -52,7 +54,7 @@ public class MoveToGoalAgent : Agent
 	protected override void OnDisable() 
 	{
 		base.OnDisable();
-		playerCollisions.CollisionWithRewardAction -= Reward;
+		//playerCollisions.CollisionWithRewardAction -= Reward; //TODO: remove
 		playerCollisions.TriggerWithRewardAction -= Reward;
 		playerCollisions.CollisionWithPunishAction -= Punish;
 		playerCollisions.TriggerWithPunishAction -= Punish;
@@ -62,6 +64,7 @@ public class MoveToGoalAgent : Agent
 	{
 		Vector2 agentPosition;
 		episodeTimeElapsed = 0;
+		environmentController.BeginEpisode();//TODO: this should be done with an event
 		contadorAcciones = 0;  // JM: variable de test para ver cuantas acciones se hacen de media hasta alcanzar el objetivo
 		do
 		{
@@ -113,7 +116,7 @@ public class MoveToGoalAgent : Agent
 
 	private void RegisterCollisionsReactions()
 	{
-		playerCollisions.CollisionWithRewardAction += Reward;
+		//playerCollisions.CollisionWithRewardAction += Reward; //TODO: remove
 		playerCollisions.TriggerWithRewardAction += Reward;
 		playerCollisions.CollisionWithPunishAction += Punish;
 		playerCollisions.TriggerWithPunishAction += Punish;

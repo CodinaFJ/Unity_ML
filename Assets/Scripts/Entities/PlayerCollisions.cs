@@ -12,7 +12,7 @@ public class PlayerCollisions : MonoBehaviour
 	protected PolygonCollider2D     polygonCollider2D;
 	protected SpriteRenderer        spriteRenderer;
 
-	public Action	CollisionWithRewardAction;
+	public Action<GameObject>	CollisionWithRewardAction;
 	public Action	CollisionWithPunishAction;
 	public Action	TriggerWithRewardAction;
 	public Action	TriggerWithPunishAction;
@@ -56,7 +56,7 @@ public class PlayerCollisions : MonoBehaviour
 	protected virtual void OnCollisionEnter2D(Collision2D other)
 	{
 		if (other.gameObject.CompareTag(GameTag.REWARD))
-			CollisionWithRewardAction?.Invoke();
+			CollisionWithRewardAction?.Invoke(other.gameObject);
 		else if (other.gameObject.CompareTag(GameTag.PUNISH))
 			CollisionWithPunishAction?.Invoke();
 	}
