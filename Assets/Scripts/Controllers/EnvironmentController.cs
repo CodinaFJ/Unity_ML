@@ -22,6 +22,7 @@ public class EnvironmentController : MonoBehaviour
 		rewardsClosedList = new();
 		agent = agentGO.GetComponent<MoveToGoalAgent>();
 		agentGO.GetComponent<PlayerCollisions>().CollisionWithRewardAction += CollectReward;
+		agentGO.GetComponent<PlayerCollisions>().TriggerWithRewardAction += CollectReward;
 		agent.environmentController = this;
 	}
 
@@ -31,10 +32,11 @@ public class EnvironmentController : MonoBehaviour
 		bool	endEpisode = false;
 
 		reward = rewardsOpenList.Find(x => x.gameObject == rewardGO);
+		reward.gameObject.SetActive(false);
 		rewardsOpenList.Remove(reward);
-		reward.enabled = false;
 		rewardsClosedList.Add(reward);
 		endEpisode = rewardsOpenList.Count == 0;
+		this.LogDebug($"Collecting reward with value: {reward.rewardValue}. End episode? {endEpisode} ");
 		agent.Reinforce(reward.rewardValue, endEpisode);
 	}
 
@@ -42,9 +44,9 @@ public class EnvironmentController : MonoBehaviour
 	{
 		foreach(var reward in rewardsClosedList)
 		{
-			reward.enabled = true;
-			rewardsClosedList.Remove(reward);
+			reward.gameObject.SetActive(true);
 			rewardsOpenList.Add(reward);
 		}
+		rewardsClosedList.Clear();
 	}
 }

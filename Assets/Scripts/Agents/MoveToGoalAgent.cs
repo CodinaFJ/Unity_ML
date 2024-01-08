@@ -54,8 +54,6 @@ public class MoveToGoalAgent : Agent
 	protected override void OnDisable() 
 	{
 		base.OnDisable();
-		//playerCollisions.CollisionWithRewardAction -= Reward; //TODO: remove
-		playerCollisions.TriggerWithRewardAction -= Reward;
 		playerCollisions.CollisionWithPunishAction -= Punish;
 		playerCollisions.TriggerWithPunishAction -= Punish;
 	}
@@ -72,7 +70,6 @@ public class MoveToGoalAgent : Agent
 	public override void CollectObservations(VectorSensor sensor)
 	{
 		sensor.AddObservation((Vector2) this.transform.localPosition);
-		//sensor.AddObservation((Vector2) target.localPosition);
 		foreach (var distance in GetComponent<PlayerRaycasts>().GetRayCollisionDistances())
 			sensor.AddObservation(distance);
 		foreach(var id in GetComponent<PlayerRaycasts>().GetRayCollisionIDs())
@@ -106,8 +103,6 @@ public class MoveToGoalAgent : Agent
 
 	private void RegisterCollisionsReactions()
 	{
-		//playerCollisions.CollisionWithRewardAction += Reward; //TODO: remove
-		playerCollisions.TriggerWithRewardAction += Reward;
 		playerCollisions.CollisionWithPunishAction += Punish;
 		playerCollisions.TriggerWithPunishAction += Punish;
 	}

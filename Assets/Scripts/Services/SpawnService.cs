@@ -4,15 +4,16 @@ using UnityEngine;
 
 public class SpawnService
 {
-	private readonly Dictionary<GameObject, SpawnZone> spawnZones = new();
+	private readonly Dictionary<GameObject, SpawnZone> spawnZones;
 	public SpawnService()
 	{
+		spawnZones = new();
+		spawnZones.Clear();
 		this.LogDebug("Started");
 	}
 
 	public void RegisterSpawnerZone(GameObject spawnObject, SpawnZone spawnZone)
 	{
-		this.LogDebug("Register spawn zone with object name" + spawnObject.name);
 		spawnZones.Add(spawnObject, spawnZone);
 	}
 

@@ -1,4 +1,5 @@
 using System;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerCollisions : MonoBehaviour
@@ -14,7 +15,7 @@ public class PlayerCollisions : MonoBehaviour
 
 	public Action<GameObject>	CollisionWithRewardAction;
 	public Action	CollisionWithPunishAction;
-	public Action	TriggerWithRewardAction;
+	public Action<GameObject>	TriggerWithRewardAction;
 	public Action	TriggerWithPunishAction;
 
 	public bool OnGround 
@@ -64,7 +65,7 @@ public class PlayerCollisions : MonoBehaviour
 	protected virtual void OnTriggerEnter2D(Collider2D other)
 	{
 		if (other.gameObject.CompareTag(GameTag.REWARD))
-			TriggerWithRewardAction?.Invoke();
+			TriggerWithRewardAction?.Invoke(other.gameObject);
 		else if (other.gameObject.CompareTag(GameTag.PUNISH))
 			TriggerWithPunishAction?.Invoke();
 	}
