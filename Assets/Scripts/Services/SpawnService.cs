@@ -4,25 +4,31 @@ using UnityEngine;
 
 public class SpawnService
 {
-	private readonly List<SpawnZone> spawnZones = new();
+	private readonly Dictionary<GameObject, SpawnZone> spawnZones = new();
 	public SpawnService()
 	{
 		this.LogDebug("Started");
 	}
 
-	public void RegisterSpawnerZone(SpawnZone spawnZone)
+	public void RegisterSpawnerZone(GameObject spawnObject, SpawnZone spawnZone)
 	{
-		this.LogDebug("Register spawn zone with tag" + spawnZone.tag.ToString());
-		spawnZones.Add(spawnZone);
+		this.LogDebug("Register spawn zone with object name" + spawnObject.name);
+		spawnZones.Add(spawnObject, spawnZone);
 	}
 
-	public bool AssertObjectSpawnedInZone(Vector2 agentPosition, string tag)
+	public bool AssertObjectSpawnedInZone(Vector2 agentPosition, GameObject spawnObject)
 	{
-		foreach(var spawnZone in spawnZones.FindAll(x => x.gameTag.ToString() == tag))
-		{
-			if (spawnZone.AssertObjectSpawnedInZone(agentPosition))
-				return true;
-		}
+		if (spawnZones[spawnObject].AssertContainsPosition(agentPosition))
+			return true;
 		return false;
+	}
+
+	public Vector2 GetPositionInSpawnZone(GameObject spawnObject)
+	{
+		if (spawnZones.ContainsKey(spawnObject))
+		{
+			return spawnZones[spawnObject].GetRandomPositionInZone();
+		}
+		return Vector2.zero;
 	}
 }

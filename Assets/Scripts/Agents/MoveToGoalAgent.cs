@@ -62,21 +62,11 @@ public class MoveToGoalAgent : Agent
 
 	public override void OnEpisodeBegin()
 	{
-		Vector2 agentPosition;
 		episodeTimeElapsed = 0;
 		environmentController.BeginEpisode();//TODO: this should be done with an event
 		contadorAcciones = 0;  // JM: variable de test para ver cuantas acciones se hacen de media hasta alcanzar el objetivo
-		do
-		{
-			agentPosition = new Vector2(Random.Range(-7f, 7f), Random.Range(-1f, 0f));
-			transform.localPosition = agentPosition;
-		} while (!AssertSpawn(transform.position));
-		target.transform.localPosition = new Vector2(Random.Range(-7.5f, 7.5f), Random.Range(-0.35f, -3f));
-	}
-
-	private bool AssertSpawn(Vector2 pos)
-	{
-		return spawnService.AssertObjectSpawnedInZone(pos, this.gameObject.tag);
+		transform.position = spawnService.GetPositionInSpawnZone(this.gameObject);
+		target.transform.position = spawnService.GetPositionInSpawnZone(target.gameObject);
 	}
 
 	public override void CollectObservations(VectorSensor sensor)
