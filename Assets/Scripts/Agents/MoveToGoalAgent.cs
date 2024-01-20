@@ -10,6 +10,7 @@ public class MoveToGoalAgent : Agent
 	[SerializeField] private float goalReward;
 	[SerializeField] private float wallPunishment;
 	[SerializeField] private float punishmentPerMSecond = -0.3f;
+	[SerializeField] private float punishmentPerJump = -0.1f;
 	[SerializeField] private float finishEpisodePunishment = -1;
 	[SerializeField] private GameObject winMask;
 	[SerializeField] private GameObject loseMask;
@@ -97,7 +98,7 @@ public class MoveToGoalAgent : Agent
 		playerMovement.Movement = new Vector2(moveRight - moveLeft, playerMovement.Movement.y);
 		if (jump == 1){
 			playerMovement.Jump();
-			AddReward(-0.1f); // Se da un pequeño punishment cada vez que salta para evitar que salte en exceso
+			AddReward(punishmentPerJump); // Se da un pequeño punishment cada vez que salta para evitar que salte en exceso
 		} 
 		//this.LogInfo("Numero de acciones: " + contadorAcciones);
 	}
@@ -123,12 +124,17 @@ public class MoveToGoalAgent : Agent
 		AddReward(value);
 		if (endEpisode)
 		{
-			actionPunishmentReduction = episodeTimeElapsed * punishmentPerMSecond;
-			AddReward(actionPunishmentReduction);
+			if (value == -1){
+				SetReward(value);  // Si viene de que se ha acabado el tiempo no tiene sentido restar -1 junto con el punish del tiempo
+			}else{
+				actionPunishmentReduction = episodeTimeElapsed * punishmentPerMSecond;
+				AddReward(actionPunishmentReduction);
+			}
+			
 			bool win = value > 0;
 			winMask.SetActive(win);
 			loseMask.SetActive(!win);
-			this.LogInfo("Total Reward: " + GetCumulativeReward()); // JM: Test para ver cuanto reward estan consiguiendo
+			this.LogInfo("Total Reward: " + GetCumulativeReward() + " || Tiempo transcurrido: " + episodeTimeElapsed + " s"); // JM: Test para ver cuanto reward estan consiguiendo
 			EndEpisode();
 		}
 	}
