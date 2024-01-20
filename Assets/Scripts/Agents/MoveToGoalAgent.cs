@@ -9,6 +9,7 @@ public class MoveToGoalAgent : Agent
 	[SerializeField] private Transform target;
 	[SerializeField] private float goalReward;
 	[SerializeField] private float wallPunishment;
+	[SerializeField] private float punishmentPerMSecond = -0.3f;
 	[SerializeField] private float finishEpisodePunishment = -1;
 	[SerializeField] private GameObject winMask;
 	[SerializeField] private GameObject loseMask;
@@ -64,7 +65,7 @@ public class MoveToGoalAgent : Agent
 		environmentController.BeginEpisode();//TODO: this should be done with an event
 		contadorAcciones = 0;  // JM: variable de test para ver cuantas acciones se hacen de media hasta alcanzar el objetivo
 		transform.position = spawnService.GetPositionInSpawnZone(this.gameObject);
-		target.transform.position = spawnService.GetPositionInSpawnZone(target.gameObject);
+		//target.transform.position = spawnService.GetPositionInSpawnZone(target.gameObject);
 	}
 
 	public override void CollectObservations(VectorSensor sensor)
@@ -107,21 +108,10 @@ public class MoveToGoalAgent : Agent
 		playerCollisions.TriggerWithPunishAction += Punish;
 	}
 
-	private void Reward()
-	{
-		actionPunishmentReduction = episodeTimeElapsed*-0.03f;
-		this.LogInfo("SUCCESS");
-		AddReward(goalReward + actionPunishmentReduction); // Al valor de 10 por encontrar el objetivo le restamos un pequeño valor por cada accion realizada desde que empieza el episodio
-		winMask.SetActive(true);
-		loseMask.SetActive(false);
-		this.LogInfo("Total Reward: " + GetCumulativeReward()); // JM: Test para ver cuanto reward estan consiguiendo
-		EndEpisode();
-	}
-
 	private void Punish()
 	{
 		this.LogInfo("FAIL");
-		SetReward(wallPunishment * -1);
+		AddReward(wallPunishment * -1);
 		winMask.SetActive(false);
 		loseMask.SetActive(true);
 		this.LogInfo("Total Reward: " + GetCumulativeReward()); // JM: Test para ver cuanto reward estan consiguiendo
@@ -130,9 +120,11 @@ public class MoveToGoalAgent : Agent
 
 	public void Reinforce(float value, bool endEpisode)
 	{
-		SetReward(value);
+		AddReward(value);
 		if (endEpisode)
 		{
+			actionPunishmentReduction = episodeTimeElapsed * punishmentPerMSecond;
+			AddReward(actionPunishmentReduction);
 			bool win = value > 0;
 			winMask.SetActive(win);
 			loseMask.SetActive(!win);

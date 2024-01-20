@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class EnvironmentController : MonoBehaviour
@@ -24,6 +26,7 @@ public class EnvironmentController : MonoBehaviour
 		agentGO.GetComponent<PlayerCollisions>().CollisionWithRewardAction += CollectReward;
 		agentGO.GetComponent<PlayerCollisions>().TriggerWithRewardAction += CollectReward;
 		agent.environmentController = this;
+		SpawnRewards();
 	}
 
 	public void CollectReward(GameObject rewardGO)
@@ -47,6 +50,13 @@ public class EnvironmentController : MonoBehaviour
 			reward.gameObject.SetActive(true);
 			rewardsOpenList.Add(reward);
 		}
+		SpawnRewards();
 		rewardsClosedList.Clear();
+	}
+
+	public void SpawnRewards()
+	{
+		foreach(var reward in rewardsOpenList)
+			reward.transform.position = spawnService.GetPositionInSpawnZone(reward.gameObject);
 	}
 }
