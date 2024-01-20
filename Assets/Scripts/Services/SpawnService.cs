@@ -14,7 +14,10 @@ public class SpawnService
 
 	public void RegisterSpawnerZone(GameObject spawnObject, SpawnZone spawnZone)
 	{
-		spawnZones.Add(spawnObject, spawnZone);
+		if (!spawnZones.ContainsKey(spawnObject))
+			spawnZones.Add(spawnObject, spawnZone);
+		else
+			spawnZones[spawnObject] = spawnZone;
 	}
 
 	public bool AssertObjectSpawnedInZone(Vector2 agentPosition, GameObject spawnObject)
