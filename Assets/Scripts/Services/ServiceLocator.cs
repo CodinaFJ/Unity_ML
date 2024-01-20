@@ -21,8 +21,9 @@ public class ServiceLocator
         {      
             var type = typeof(T);
 
-            if (!services.ContainsKey(type))
-                services.Add(type, service);
+            if (services.ContainsKey(type))
+				services.Remove(type);
+			services.Add(type, service);
         }
 
         public void RemoveService<T>(T service)

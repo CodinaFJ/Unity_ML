@@ -4,7 +4,13 @@ using UnityEngine;
 
 public class SpawnService
 {
-	private readonly Dictionary<GameObject, SpawnZone> spawnZones;
+	struct SpawnZoneObject
+	{
+		public GameObject	ObjectToSpawn;
+		public SpawnZone	SpawnZone;
+	}
+
+	private readonly List<SpawnZoneObject> spawnZones;
 	public SpawnService()
 	{
 		spawnZones = new();
@@ -14,25 +20,21 @@ public class SpawnService
 
 	public void RegisterSpawnerZone(GameObject spawnObject, SpawnZone spawnZone)
 	{
-		if (spawnZones.ContainsKey(spawnObject))
-		{
-			spawnZones.Remove(spawnObject);
-		}
-		spawnZones.Add(spawnObject, spawnZone);
+		spawnZones.Add(new SpawnZoneObject{ ObjectToSpawn = spawnObject, SpawnZone = spawnZone});
 	}
 
 	public bool AssertObjectSpawnedInZone(Vector2 agentPosition, GameObject spawnObject)
 	{
-		if (spawnZones[spawnObject].AssertContainsPosition(agentPosition))
+		if (spawnZones.Find(x => x.ObjectToSpawn == spawnObject).SpawnZone.AssertContainsPosition(agentPosition))
 			return true;
 		return false;
 	}
 
 	public Vector2 GetPositionInSpawnZone(GameObject spawnObject)
 	{
-		if (spawnZones.ContainsKey(spawnObject))
+		if (spawnZones.Exists(x => x.ObjectToSpawn == spawnObject))
 		{
-			return spawnZones[spawnObject].GetRandomPositionInZone();
+			return spawnZones.Find(x => x.ObjectToSpawn == spawnObject).SpawnZone.GetRandomPositionInZone();
 		}
 		return Vector2.zero;
 	}
