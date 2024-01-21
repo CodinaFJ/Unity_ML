@@ -112,10 +112,10 @@ public class MoveToGoalAgent : Agent
 	private void Punish()
 	{
 		this.LogInfo("FAIL");
-		AddReward(wallPunishment * -1);
+		AddReward(wallPunishment);
 		winMask.SetActive(false);
 		loseMask.SetActive(true);
-		this.LogInfo("Total Reward: " + GetCumulativeReward()); // JM: Test para ver cuanto reward estan consiguiendo
+		this.LogInfo("Total Reward: " + GetCumulativeReward() + " || Tiempo transcurrido: " + episodeTimeElapsed + "s"); // JM: Test para ver cuanto reward estan consiguiendo
 		EndEpisode();
 	}
 
@@ -124,8 +124,8 @@ public class MoveToGoalAgent : Agent
 		AddReward(value);
 		if (endEpisode)
 		{
-			if (value == -1){
-				SetReward(value);  // Si viene de que se ha acabado el tiempo no tiene sentido restar -1 junto con el punish del tiempo
+			if (value <= -1){
+				AddReward(value);  // Si viene de que se ha acabado el tiempo no tiene sentido restar un valor junto con el punish del tiempo
 			}else{
 				actionPunishmentReduction = episodeTimeElapsed * punishmentPerMSecond;
 				AddReward(actionPunishmentReduction);
@@ -134,7 +134,7 @@ public class MoveToGoalAgent : Agent
 			bool win = value > 0;
 			winMask.SetActive(win);
 			loseMask.SetActive(!win);
-			this.LogInfo("Total Reward: " + GetCumulativeReward() + " || Tiempo transcurrido: " + episodeTimeElapsed + " s"); // JM: Test para ver cuanto reward estan consiguiendo
+			this.LogInfo("Total Reward: " + GetCumulativeReward() + " || Tiempo transcurrido: " + episodeTimeElapsed + "s"); // JM: Test para ver cuanto reward estan consiguiendo
 			EndEpisode();
 		}
 	}

@@ -671,7 +671,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1852368299739511963}
   m_Layer: 0
-  m_Name: Environment_02
+  m_Name: Environment
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2806,20 +2806,8 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4544711265827933919, guid: 20201c0aa81721044a9c29a622d42ed8, type: 3}
-      propertyPath: wallPunishment
-      value: -10
-      objectReference: {fileID: 0}
-    - target: {fileID: 4544711265827933919, guid: 20201c0aa81721044a9c29a622d42ed8, type: 3}
-      propertyPath: episodeTimeLimit
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 4544711265827933919, guid: 20201c0aa81721044a9c29a622d42ed8, type: 3}
       propertyPath: punishmentPerMSecond
       value: -0.3
-      objectReference: {fileID: 0}
-    - target: {fileID: 4544711265827933919, guid: 20201c0aa81721044a9c29a622d42ed8, type: 3}
-      propertyPath: finishEpisodePunishment
-      value: -15
       objectReference: {fileID: 0}
     - target: {fileID: 5765025813577371190, guid: 20201c0aa81721044a9c29a622d42ed8, type: 3}
       propertyPath: m_LocalPosition.x
