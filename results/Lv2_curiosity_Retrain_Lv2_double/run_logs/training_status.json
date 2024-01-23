@@ -1,0 +1,47 @@
+{
+    "MoveToGoal": {
+        "checkpoints": [
+            {
+                "steps": 499978,
+                "file_path": "results\\Lv2_curiosity_Retrain_Lv2_double\\MoveToGoal\\MoveToGoal-499978.onnx",
+                "reward": 25.86833351135254,
+                "creation_time": 1706040474.2277865,
+                "auxillary_file_paths": [
+                    "results\\Lv2_curiosity_Retrain_Lv2_double\\MoveToGoal\\MoveToGoal-499978.pt"
+                ]
+            },
+            {
+                "steps": 999983,
+                "file_path": "results\\Lv2_curiosity_Retrain_Lv2_double\\MoveToGoal\\MoveToGoal-999983.onnx",
+                "reward": 28.941333446502686,
+                "creation_time": 1706041284.261861,
+                "auxillary_file_paths": [
+                    "results\\Lv2_curiosity_Retrain_Lv2_double\\MoveToGoal\\MoveToGoal-999983.pt"
+                ]
+            },
+            {
+                "steps": 1000049,
+                "file_path": "results\\Lv2_curiosity_Retrain_Lv2_double\\MoveToGoal\\MoveToGoal-1000049.onnx",
+                "reward": 29.210606197258095,
+                "creation_time": 1706041284.402859,
+                "auxillary_file_paths": [
+                    "results\\Lv2_curiosity_Retrain_Lv2_double\\MoveToGoal\\MoveToGoal-1000049.pt"
+                ]
+            }
+        ],
+        "final_checkpoint": {
+            "steps": 1000049,
+            "file_path": "results\\Lv2_curiosity_Retrain_Lv2_double\\MoveToGoal.onnx",
+            "reward": 29.210606197258095,
+            "creation_time": 1706041284.402859,
+            "auxillary_file_paths": [
+                "results\\Lv2_curiosity_Retrain_Lv2_double\\MoveToGoal\\MoveToGoal-1000049.pt"
+            ]
+        }
+    },
+    "metadata": {
+        "stats_format_version": "0.3.0",
+        "mlagents_version": "0.30.0",
+        "torch_version": "2.1.1+cpu"
+    }
+}
