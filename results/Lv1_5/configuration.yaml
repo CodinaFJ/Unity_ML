@@ -24,7 +24,7 @@ behaviors:
       deterministic: false
     reward_signals:
       extrinsic:
-        gamma: 0.98
+        gamma: 0.99
         strength: 1.0
         network_settings:
           normalize: false
@@ -35,14 +35,22 @@ behaviors:
           goal_conditioning_type: hyper
           deterministic: false
       curiosity:
-        strength: 0.03
         gamma: 0.99
+        strength: 0.02
+        network_settings:
+          normalize: false
+          hidden_units: 256
+          num_layers: 2
+          vis_encode_type: simple
+          memory: null
+          goal_conditioning_type: hyper
+          deterministic: false
+        learning_rate: 0.0003
         encoding_size: 256
-        learning_rate: 3.0e-4
-    init_path: null
+    init_path: results\Lv1_v2_punishOk\MoveToGoal\checkpoint.pt
     keep_checkpoints: 5
     checkpoint_interval: 500000
-    max_steps: 500000
+    max_steps: 750000
     time_horizon: 64
     summary_freq: 50000
     threaded: false
@@ -62,17 +70,17 @@ engine_settings:
   width: 84
   height: 84
   quality_level: 5
-  time_scale: 20
+  time_scale: 20.0
   target_frame_rate: -1
   capture_frame_rate: 60
   no_graphics: false
 environment_parameters: null
 checkpoint_settings:
-  run_id: 
-  initialize_from: Lv1_curiosity
+  run_id: Lv1_5
+  initialize_from: Lv1_v2_punishOk
   load_model: false
   resume: false
-  force: false
+  force: true
   train_model: false
   inference: false
   results_dir: results

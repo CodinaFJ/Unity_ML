@@ -3577,7 +3577,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4544711265827933919, guid: 20201c0aa81721044a9c29a622d42ed8, type: 3}
       propertyPath: wallPunishment
-      value: -20
+      value: -25
       objectReference: {fileID: 0}
     - target: {fileID: 4544711265827933919, guid: 20201c0aa81721044a9c29a622d42ed8, type: 3}
       propertyPath: episodeTimeLimit

@@ -125,7 +125,7 @@ public class MoveToGoalAgent : Agent
 		if (endEpisode)
 		{
 			if (value <= -1){
-				AddReward(value);  // Si viene de que se ha acabado el tiempo no tiene sentido restar un valor junto con el punish del tiempo
+				//AddReward(value);  // Si viene de que se ha acabado el tiempo no tiene sentido restar un valor junto con el punish del tiempo
 			}else{
 				actionPunishmentReduction = episodeTimeElapsed * punishmentPerMSecond;
 				AddReward(actionPunishmentReduction);

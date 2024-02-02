@@ -1,4 +1,4 @@
 venv\scripts\activate
 
-mlagents-learn configutation_test.yaml --run-id=Test 
+mlagents-learn configuration_lv1.yalm --run-id=Test 
 mlagents-learn configutation_test.yaml --initialize-from=TEST --run-id=Test 
