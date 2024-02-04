@@ -7,11 +7,12 @@ using UnityEngine;
 public class MoveToGoalAgent : Agent
 {
 	[SerializeField] private Transform target;
-	[SerializeField] private float goalReward;
-	[SerializeField] private float wallPunishment;
+	//[SerializeField] private float goalReward;
+	[SerializeField] private float dangerPunishment= -1;
+	[SerializeField] private float finishEpisodePunishment = -1;
 	[SerializeField] private float punishmentPerMSecond = -0.3f;
 	[SerializeField] private float punishmentPerJump = -0.1f;
-	[SerializeField] private float finishEpisodePunishment = -1;
+	
 	[SerializeField] private GameObject winMask;
 	[SerializeField] private GameObject loseMask;
 	[SerializeField] private float episodeTimeLimit = 10;
@@ -112,7 +113,7 @@ public class MoveToGoalAgent : Agent
 	private void Punish()
 	{
 		this.LogInfo("FAIL");
-		AddReward(wallPunishment);
+		AddReward(dangerPunishment);
 		winMask.SetActive(false);
 		loseMask.SetActive(true);
 		this.LogInfo("Total Reward: " + GetCumulativeReward() + " || Tiempo transcurrido: " + episodeTimeElapsed + "s"); // JM: Test para ver cuanto reward estan consiguiendo
