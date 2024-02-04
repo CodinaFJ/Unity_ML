@@ -1,4 +1,8 @@
 venv\scripts\activate
 
-mlagents-learn configuration_lv1.yalm --run-id=Test 
+mlagents-learn configuration_lv1.yaml --run-id=Test 
 mlagents-learn configutation_test.yaml --initialize-from=TEST --run-id=Test 
+
+Lv1_v2_punishOk
+
+mlagents-learn configuration_lv1_v2.yaml --initialize-from=Lv1_v2_punishOk --run-id=Lv1_5
