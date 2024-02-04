@@ -103,10 +103,10 @@ MonoBehaviour:
   hasUpgradedFromAgentParameters: 1
   MaxStep: 1000
   target: {fileID: 0}
-  goalReward: 10
-  wallPunishment: 1
-  punishmentPerMSecond: -0.3
+  dangerPunishment: -1
   finishEpisodePunishment: -1
+  punishmentPerMSecond: -0.3
+  punishmentPerJump: -0.1
   winMask: {fileID: 0}
   loseMask: {fileID: 0}
   episodeTimeLimit: 10
@@ -172,7 +172,7 @@ MonoBehaviour:
   numberOfRaysSide: 6
   recognizableLayerMask:
     serializedVersion: 2
-    m_Bits: 208
+    m_Bits: 720
 --- !u!212 &8689252357559564755
 SpriteRenderer:
   m_ObjectHideFlags: 0

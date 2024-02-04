@@ -4,5 +4,6 @@ using UnityEngine;
 
 public class Reward : MonoBehaviour
 {
-    public float rewardValue;
+    public float	rewardValue;
+	public bool		IsEnd;
 }
