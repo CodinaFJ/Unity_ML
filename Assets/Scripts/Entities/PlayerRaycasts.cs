@@ -32,7 +32,7 @@ public class PlayerRaycasts : MonoBehaviour
 			RecognitionRayHits[i] = CastRayAngular(MyMath.Rotate(direction, 180 * i/(numberOfRaysUp - 1)));
 		for (i = 0; i < numberOfRaysDown; i++)
 			RecognitionRayHits[numberOfRaysUp + i] =
-				CastRayAngular(MyMath.Rotate(direction, (90 * i/(numberOfRaysDown - 1)) + 225));
+				CastRayAngular(MyMath.Rotate(direction, (180 * i/(numberOfRaysDown - 1)) + 180));
 	}
 
 	void	LaunchParallelRaycasts()
