@@ -40,7 +40,7 @@ public class EnvironmentController : MonoBehaviour
 		rewardsClosedList.Add(reward);
 		endEpisode = rewardsOpenList.Count == 0;
 		//this.LogDebug($"Collecting reward with value: {reward.rewardValue}. End episode? {endEpisode} ");
-		agent.Reinforce(reward.rewardValue, endEpisode);
+		agent.Reinforce(reward.rewardValue, reward.IsEnd);
 	}
 
 	public void BeginEpisode()

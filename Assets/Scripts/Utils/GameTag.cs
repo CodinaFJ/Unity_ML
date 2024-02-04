@@ -9,6 +9,7 @@ public static class GameTag
 	public const string PUNISH			= "Punish";
 	public const string GROUND			= "Ground";
 	public const string SPAWN			= "Spawn";
+	public const string END			= "End";
 
 	private static readonly List<string> gameTags = new(){
 		UNTAGGED,
@@ -16,7 +17,8 @@ public static class GameTag
 		REWARD,
 		PUNISH,
 		GROUND,
-		SPAWN
+		SPAWN,
+		END
 	};
 
 	public static int 	GetGameTagId(string tag)
@@ -32,5 +34,6 @@ public enum Tag
 	Reward,
 	Punish,
 	Ground,
-	Spawn
+	Spawn,
+	End
 }
