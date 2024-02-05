@@ -172,7 +172,7 @@ MonoBehaviour:
   numberOfRaysSide: 6
   recognizableLayerMask:
     serializedVersion: 2
-    m_Bits: 208
+    m_Bits: 720
 --- !u!212 &8689252357559564755
 SpriteRenderer:
   m_ObjectHideFlags: 0
