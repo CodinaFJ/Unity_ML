@@ -6,5 +6,7 @@ mlagents-learn configutation_test.yaml --initialize-from=TEST --run-id=Test
 Lv1_v2_punishOk
 
 
-mlagents-learn configuration_lv1_v2.yaml --run-id=Lv1_128
+mlagents-learn configuration_lv1_v2.yaml --run-id=Lv1_EndGoal
 mlagents-learn configuration_lv15.yaml --initialize-from=Lv15_128_curiosity_v3 --run-id=Lv15_128_curiosity_v4
+
+mlagents-learn configuration_lv2_v3.yaml --run-id=Lv2_128

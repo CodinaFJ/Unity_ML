@@ -3545,6 +3545,10 @@ PrefabInstance:
       propertyPath: numberOfRaysSide
       value: 8
       objectReference: {fileID: 0}
+    - target: {fileID: 3484513904611977082, guid: 20201c0aa81721044a9c29a622d42ed8, type: 3}
+      propertyPath: recognizableLayerMask.m_Bits
+      value: 208
+      objectReference: {fileID: 0}
     - target: {fileID: 4451783813121629595, guid: 20201c0aa81721044a9c29a622d42ed8, type: 3}
       propertyPath: coyoteExtension
       value: 0.25
